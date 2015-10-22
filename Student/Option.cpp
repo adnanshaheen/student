@@ -91,7 +91,37 @@ void COption::CreateStudent(bool bParam/* = false*/)
 			m_pStudent->SetTest1(nTest1);
 			m_pStudent->SetTest2(nTest2);
 		}
+
+		AddCourses();
 	}
+}
+
+void COption::AddCourses()
+{
+	char cYesNo = 'N';
+
+	do {
+		cout << "Add " << ((cYesNo == 'Yes') ? "another " : "") << "course? (Y|N)." << endl;
+		cin >> cYesNo;
+
+		if (cYesNo == 'Y' || cYesNo == 'y') {
+			CCourse cCourse;
+			string csName;
+			string csID;
+			int nCredit = 0;
+
+			cout << "Please enter course ID: ";
+			cin >> csID;
+			cout << "Please enter course name: ";
+			cin >> csName;
+			cout << "Please enter course credit hours: ";
+			cin >> nCredit;
+
+			cCourse.SetID(csID);
+			cCourse.SetName(csName);
+			cCourse.SetCredit(nCredit);
+		}
+	} while (cYesNo == 'Y');
 }
 
 void COption::PrintStudent() const
@@ -213,6 +243,8 @@ void COption::CreateGraduate(bool bParam/* = false*/)
 			m_pGraduate->SetTest1(nTest1);
 			m_pGraduate->SetTest2(nTest2);
 		}
+
+		AddCourses();
 	}
 }
 
@@ -274,6 +306,8 @@ void COption::CreateUndergrade(bool bParam/* = false*/)
 			m_pUndergrade->SetTest1(nTest1);
 			m_pUndergrade->SetTest2(nTest2);
 		}
+
+		AddCourses();
 	}
 }
 
@@ -313,11 +347,11 @@ void COption::CreateCourse(bool bParam/* = false*/)
 		string csID;
 		int nCredit = 0;
 
-		cout << "Please enter ID: ";
+		cout << "Please enter course ID: ";
 		cin >> csID;
-		cout << "Please enter First name: ";
+		cout << "Please enter course name: ";
 		cin >> csName;
-		cout << "Please enter Last name: ";
+		cout << "Please enter course credit hours: ";
 		cin >> nCredit;
 
 		if (bParam)

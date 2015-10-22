@@ -41,6 +41,9 @@ public:
 	void DeleteCourse();
 
 private:
+	void AddCourses();
+
+private:
 	CStudent* m_pStudent;
 	CEmployee* m_pEmployee;
 	CUndergraduate* m_pUndergrade;
