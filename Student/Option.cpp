@@ -20,31 +20,31 @@ COption::COption()
 
 COption::~COption()
 {
-	DeleteStudent();
-	DeleteEmployee();
-	DeleteGraduate();
-	DeleteUndergrade();
-	DeleteCourse();
+	DeleteStudent(false);
+	DeleteEmployee(false);
+	DeleteGraduate(false);
+	DeleteUndergrade(false);
+	DeleteCourse(false);
+}
+
+void COption::DisplayNullObjMsg() const
+{
+	cout << "!! Sorry ... The object is not created yet ....." << endl;
 }
 
 int COption::MainOptions() const
 {
 	int nOptions = 0;
 	cout << "Student Application Main Menu" << endl;
-	cout << "=====================================" << endl;
-	cout << "1- Create Student Class" << endl;
-	cout << "2- Create undergraduate student class" << endl;
-	cout << "3- Create graduate class" << endl;
-	cout << "4- Create Employee class" << endl;
-	cout << "5- Create Course class" << endl;
-	cout << "6- Print Student class" << endl;
-	cout << "7- Print undergraduate class" << endl;
-	cout << "8- Print graduate class" << endl;
-	cout << "9- Print Employee class" << endl;
-	cout << "10- Print course class" << endl;
-	cout << "0- exit" << endl;
-	cout << "=====================================" << endl;
-	cout << "Please enter your choice or 0 to exit" << endl;
+	cout << "======================================" << endl;
+	cout << "1- Student Class." << endl;
+	cout << "2- Undergraduate student class." << endl;
+	cout << "3- Graduate student class." << endl;
+	cout << "4- Employee class." << endl;
+	cout << "5- Course class." << endl;
+	cout << "0- exit." << endl;
+	cout << "======================================" << endl;
+	cout << "Please enter your choice or 0 to exit." << endl;
 	cin >> nOptions;
 	return nOptions;
 }
@@ -52,9 +52,11 @@ int COption::MainOptions() const
 int COption::StudentOptions() const
 {
 	int nOptions = 0;
-	cout << "1.1- Create non parameterized constructor [1]" << endl;
-	cout << "1.2- Create parameterized constructor [2]" << endl;
-	cout << "1.3- return to main menu [3]" << endl;
+	cout << "1- Create non parameterized constructor." << endl;
+	cout << "2- Create parameterized constructor." << endl;
+	cout << "3- Delete the object." << endl;
+	cout << "4- Print Student class." << endl;
+	cout << "5- return to main menu." << endl;
 	cin >> nOptions;
 	return nOptions;
 }
@@ -129,23 +131,27 @@ void COption::PrintStudent() const
 	if (m_pStudent)
 		m_pStudent->Print();
 	else
-		cout << "!! Sorry ... The student object is created yet ....." << endl;
+		DisplayNullObjMsg();
 }
 
-void COption::DeleteStudent()
+void COption::DeleteStudent(bool bMsg/* = true*/)
 {
 	if (m_pStudent) {
 		delete m_pStudent;
 		m_pStudent = NULL;
 	}
+	else if (bMsg)
+		DisplayNullObjMsg();
 }
 
 int COption::EmployeeOptions() const
 {
 	int nOptions = 0;
-	cout << "1.1- Create non parameterized constructor [1]" << endl;
-	cout << "1.2- Create parameterized constructor [2]" << endl;
-	cout << "1.3- return to main menu [3]" << endl;
+	cout << "1- Create non parameterized constructor." << endl;
+	cout << "2- Create parameterized constructor." << endl;
+	cout << "3- Delete the object." << endl;
+	cout << "4- Print Employee class." << endl;
+	cout << "5- return to main menu." << endl;
 	cin >> nOptions;
 	return nOptions;
 }
@@ -190,23 +196,27 @@ void COption::PrintEmployee() const
 	if (m_pEmployee)
 		m_pEmployee->Print();
 	else
-		cout << "!! Sorry ... The employee object is not created yet ....." << endl;
+		DisplayNullObjMsg();
 }
 
-void COption::DeleteEmployee()
+void COption::DeleteEmployee(bool bMsg/* = true*/)
 {
 	if (m_pEmployee) {
 		delete m_pEmployee;
 		m_pEmployee = NULL;
 	}
+	else if (bMsg)
+		DisplayNullObjMsg();
 }
 
 int COption::GraduateOptions() const
 {
 	int nOptions = 0;
-	cout << "1.1- Create non parameterized constructor [1]" << endl;
-	cout << "1.2- Create parameterized constructor [2]" << endl;
-	cout << "1.3- return to main menu [3]" << endl;
+	cout << "1- Create non parameterized constructor." << endl;
+	cout << "2- Create parameterized constructor." << endl;
+	cout << "3- Delete the object." << endl;
+	cout << "4- Print graduate class." << endl;
+	cout << "5- return to main menu." << endl;
 	cin >> nOptions;
 	return nOptions;
 }
@@ -253,23 +263,27 @@ void COption::PrintGraduate() const
 	if (m_pGraduate)
 		m_pGraduate->Print();
 	else
-		cout << "!! Sorry ... The Grduate Student object is not created yet ....." << endl;
+		DisplayNullObjMsg();
 }
 
-void COption::DeleteGraduate()
+void COption::DeleteGraduate(bool bMsg/* = true*/)
 {
 	if (m_pGraduate) {
 		delete m_pGraduate;
 		m_pGraduate = NULL;
 	}
+	else if (bMsg)
+		DisplayNullObjMsg();
 }
 
 int COption::UndergradeOptions() const
 {
 	int nOptions = 0;
-	cout << "1.1- Create non parameterized constructor [1]" << endl;
-	cout << "1.2- Create parameterized constructor [2]" << endl;
-	cout << "1.3- return to main menu [3]" << endl;
+	cout << "1- Create non parameterized constructor." << endl;
+	cout << "2- Create parameterized constructor." << endl;
+	cout << "3- Delete the object." << endl;
+	cout << "4- Print undergraduate class." << endl;
+	cout << "5- return to main menu." << endl;
 	cin >> nOptions;
 	return nOptions;
 }
@@ -316,23 +330,27 @@ void COption::PrintUndergrade() const
 	if (m_pUndergrade)
 		m_pUndergrade->Print();
 	else
-		cout << "!! Sorry ... The Undergrduate Student object is not created yet ....." << endl;
+		DisplayNullObjMsg();
 }
 
-void COption::DeleteUndergrade()
+void COption::DeleteUndergrade(bool bMsg/* = true*/)
 {
 	if (m_pUndergrade) {
 		delete m_pUndergrade;
 		m_pUndergrade = NULL;
 	}
+	else if (bMsg)
+		DisplayNullObjMsg();
 }
 
 int COption::CourseOptions() const
 {
 	int nOptions = 0;
-	cout << "1.1- Create non parameterized constructor [1]" << endl;
-	cout << "1.2- Create parameterized constructor [2]" << endl;
-	cout << "1.3- return to main menu [3]" << endl;
+	cout << "1- Create non parameterized constructor." << endl;
+	cout << "2- Create parameterized constructor." << endl;
+	cout << "3- Delete the object." << endl;
+	cout << "4- Print course class." << endl;
+	cout << "5- return to main menu." << endl;
 	cin >> nOptions;
 	return nOptions;
 }
@@ -369,13 +387,15 @@ void COption::PrintCourse()
 	if (m_pCourse)
 		m_pCourse->Print();
 	else
-		cout << "!! Sorry ... The Course object is not created yet ....." << endl;
+		DisplayNullObjMsg();
 }
 
-void COption::DeleteCourse()
+void COption::DeleteCourse(bool bMsg/* = true*/)
 {
 	if (m_pCourse) {
 		delete m_pCourse;
 		m_pCourse = NULL;
 	}
+	else if (bMsg)
+		DisplayNullObjMsg();
 }
