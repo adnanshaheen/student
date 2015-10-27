@@ -15,8 +15,8 @@ public:
 	CStudent(const unsigned int uID,
 		const string csFirstName,
 		const string csLastName,
-		const unsigned int nTest1,
-		const unsigned int nTest2);
+		const unsigned int nTest1 = 0,
+		const unsigned int nTest2 = 0);
 	CStudent(const CStudent& cStudent);
 	virtual ~CStudent(void);
 

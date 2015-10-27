@@ -12,8 +12,8 @@ CStudent::CStudent(
 	const unsigned int uID,
 	const string csFirstName,
 	const string csLastName,
-	const unsigned int nTest1,
-	const unsigned int nTest2) : CPerson(uID, csFirstName, csLastName), m_nTest1(nTest1), m_nTest2(nTest2)
+	const unsigned int nTest1/* = 0*/,
+	const unsigned int nTest2/* = 0*/) : CPerson(uID, csFirstName, csLastName), m_nTest1(nTest1), m_nTest2(nTest2)
 {
 	m_cCourses.clear();
 }

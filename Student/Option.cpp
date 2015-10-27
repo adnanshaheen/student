@@ -1,5 +1,8 @@
 
 #include <iostream>
+
+using namespace std;
+
 #include "Option.h"
 #include "Student.h"
 #include "Employee.h"
@@ -7,7 +10,6 @@
 #include "Undergraduate.h"
 #include "Course.h"
 
-using namespace std;
 
 COption::COption()
 {
@@ -34,7 +36,7 @@ void COption::DisplayNullObjMsg() const
 
 int COption::MainOptions() const
 {
-	int nOptions = 0;
+	int nOptions = -1;
 	cout << "Student Application Main Menu" << endl;
 	cout << "======================================" << endl;
 	cout << "1- Student Class." << endl;
@@ -44,20 +46,31 @@ int COption::MainOptions() const
 	cout << "5- Course class." << endl;
 	cout << "0- exit." << endl;
 	cout << "======================================" << endl;
-	cout << "Please enter your choice or 0 to exit." << endl;
-	cin >> nOptions;
+	while (true) {
+		cout << "Please enter your choice or 0 to exit." << endl;
+		cin >> nOptions;
+		if (ValidateInput(cin))
+			break;
+		nOptions = -1;
+	}
 	return nOptions;
 }
 
 int COption::StudentOptions() const
 {
-	int nOptions = 0;
+	int nOptions = -1;
 	cout << "1- Create non parameterized constructor." << endl;
 	cout << "2- Create parameterized constructor." << endl;
 	cout << "3- Delete the object." << endl;
 	cout << "4- Print Student class." << endl;
 	cout << "5- return to main menu." << endl;
-	cin >> nOptions;
+	while (true) {
+		cout << "Please enter your choice ";
+		cin >> nOptions;
+		if (ValidateInput(cin))
+			break;
+		nOptions = -1;
+	}
 	return nOptions;
 }
 
@@ -70,35 +83,32 @@ void COption::CreateStudent(bool bParam/* = false*/)
 		string csFirstName;
 		string csLastName;
 		int nID = 0;
-		int nTest1;
-		int nTest2;
 
 		cout << "Please enter First name: ";
 		cin >> csFirstName;
 		cout << "Please enter Last name: ";
 		cin >> csLastName;
-		cout << "Please enter ID: ";
-		cin >> nID;
-		cout << "Please enter 1st Test score: ";
-		cin >> nTest1;
-		cout << "Please enter 2nd Test score: ";
-		cin >> nTest2;
+		while (true) {
+			cout << "Please enter ID: ";
+			cin >> nID;
+			if (ValidateInput(cin))
+				break;
+			nID = 0;
+		}
 
 		if (bParam)
-			m_pStudent = new CStudent(nID, csFirstName, csLastName, nTest1, nTest2);
+			m_pStudent = new CStudent(nID, csFirstName, csLastName);
 		else if (m_pStudent) {
 			m_pStudent->SetID(nID);
 			m_pStudent->SetFirstName(csFirstName);
 			m_pStudent->SetLastName(csLastName);
-			m_pStudent->SetTest1(nTest1);
-			m_pStudent->SetTest2(nTest2);
 		}
 
-		AddCourses();
+		AddCourses(m_pStudent);
 	}
 }
 
-void COption::AddCourses()
+void COption::AddCourses(CStudent* pStudent)
 {
 	char cYesNo = 'N';
 
@@ -116,12 +126,19 @@ void COption::AddCourses()
 			cin >> csID;
 			cout << "Please enter course name: ";
 			cin >> csName;
-			cout << "Please enter course credit hours: ";
-			cin >> nCredit;
+			while (true) {
+				cout << "Please enter course credit hours: ";
+				cin >> nCredit;
+				if (ValidateInput(cin))
+					break;
+				nCredit = 0;
+			}
 
 			cCourse.SetID(csID);
 			cCourse.SetName(csName);
 			cCourse.SetCredit(nCredit);
+
+			pStudent->AddCourse(cCourse);
 		}
 	} while (cYesNo == 'Y');
 }
@@ -152,7 +169,13 @@ int COption::EmployeeOptions() const
 	cout << "3- Delete the object." << endl;
 	cout << "4- Print Employee class." << endl;
 	cout << "5- return to main menu." << endl;
-	cin >> nOptions;
+	while (true) {
+		cout << "Please enter your choice ";
+		cin >> nOptions;
+		if (ValidateInput(cin))
+			break;
+		nOptions = -1;
+	}
 	return nOptions;
 }
 
@@ -172,12 +195,22 @@ void COption::CreateEmployee(bool bParam/* = false*/)
 		cin >> csFirstName;
 		cout << "Please enter Last name: ";
 		cin >> csLastName;
-		cout << "Please enter ID: ";
-		cin >> nID;
+		while (true) {
+			cout << "Please enter ID: ";
+			cin >> nID;
+			if (ValidateInput(cin))
+				break;
+			nID = 0;
+		}
 		cout << "Please enter SSN: ";
 		cin >> csSSN;
-		cout << "Please enter Salary: ";
-		cin >> u64Salary;
+		while (true) {
+			cout << "Please enter Salary: ";
+			cin >> u64Salary;
+			if (ValidateInput(cin))
+				break;
+			u64Salary = 0;
+		}
 
 		if (bParam)
 			m_pEmployee = new CEmployee(nID, csFirstName, csLastName, csSSN, u64Salary);
@@ -217,7 +250,13 @@ int COption::GraduateOptions() const
 	cout << "3- Delete the object." << endl;
 	cout << "4- Print graduate class." << endl;
 	cout << "5- return to main menu." << endl;
-	cin >> nOptions;
+	while (true) {
+		cout << "Please enter your choice ";
+		cin >> nOptions;
+		if (ValidateInput(cin))
+			break;
+		nOptions = -1;
+	}
 	return nOptions;
 }
 
@@ -237,12 +276,27 @@ void COption::CreateGraduate(bool bParam/* = false*/)
 		cin >> csFirstName;
 		cout << "Please enter Last name: ";
 		cin >> csLastName;
-		cout << "Please enter ID: ";
-		cin >> nID;
-		cout << "Please enter 1st Test score: ";
-		cin >> nTest1;
-		cout << "Please enter 2nd Test score: ";
-		cin >> nTest2;
+		while (true) {
+			cout << "Please enter ID: ";
+			cin >> nID;
+			if (ValidateInput(cin))
+				break;
+			nID = 0;
+		}
+		while (true) {
+			cout << "Please enter 1st Test score: ";
+			cin >> nTest1;
+			if (ValidateInput(cin))
+				break;
+			nTest1 = 0;
+		}
+		while (true) {
+			cout << "Please enter 2nd Test score: ";
+			cin >> nTest2;
+			if (ValidateInput(cin))
+				break;
+			nTest2 = 0;
+		}
 
 		if (bParam)
 			m_pGraduate = new CGraduate(nID, csFirstName, csLastName, nTest1, nTest2);
@@ -254,7 +308,7 @@ void COption::CreateGraduate(bool bParam/* = false*/)
 			m_pGraduate->SetTest2(nTest2);
 		}
 
-		AddCourses();
+		AddCourses(m_pGraduate);
 	}
 }
 
@@ -284,7 +338,13 @@ int COption::UndergradeOptions() const
 	cout << "3- Delete the object." << endl;
 	cout << "4- Print undergraduate class." << endl;
 	cout << "5- return to main menu." << endl;
-	cin >> nOptions;
+	while (true) {
+		cout << "Please enter your choice ";
+		cin >> nOptions;
+		if (ValidateInput(cin))
+			break;
+		nOptions = -1;
+	}
 	return nOptions;
 }
 
@@ -304,12 +364,27 @@ void COption::CreateUndergrade(bool bParam/* = false*/)
 		cin >> csFirstName;
 		cout << "Please enter Last name: ";
 		cin >> csLastName;
-		cout << "Please enter ID: ";
-		cin >> nID;
-		cout << "Please enter 1st Test score: ";
-		cin >> nTest1;
-		cout << "Please enter 2nd Test score: ";
-		cin >> nTest2;
+		while (true) {
+			cout << "Please enter ID: ";
+			cin >> nID;
+			if (ValidateInput(cin))
+				break;
+			nID = 0;
+		}
+		while (true) {
+			cout << "Please enter 1st Test score: ";
+			cin >> nTest1;
+			if (ValidateInput(cin))
+				break;
+			nTest1 = 0;
+		}
+		while (true) {
+			cout << "Please enter 2nd Test score: ";
+			cin >> nTest2;
+			if (ValidateInput(cin))
+				break;
+			nTest2 = 0;
+		}
 
 		if (bParam)
 			m_pUndergrade = new CUndergraduate(nID, csFirstName, csLastName, nTest1, nTest2);
@@ -321,7 +396,7 @@ void COption::CreateUndergrade(bool bParam/* = false*/)
 			m_pUndergrade->SetTest2(nTest2);
 		}
 
-		AddCourses();
+		AddCourses(m_pUndergrade);
 	}
 }
 
@@ -351,7 +426,13 @@ int COption::CourseOptions() const
 	cout << "3- Delete the object." << endl;
 	cout << "4- Print course class." << endl;
 	cout << "5- return to main menu." << endl;
-	cin >> nOptions;
+	while (true) {
+		cout << "Please enter your choice ";
+		cin >> nOptions;
+		if (ValidateInput(cin))
+			break;
+		nOptions = -1;
+	}
 	return nOptions;
 }
 
@@ -369,8 +450,13 @@ void COption::CreateCourse(bool bParam/* = false*/)
 		cin >> csID;
 		cout << "Please enter course name: ";
 		cin >> csName;
-		cout << "Please enter course credit hours: ";
-		cin >> nCredit;
+		while (true) {
+			cout << "Please enter course credit hours: ";
+			cin >> nCredit;
+			if (ValidateInput(cin))
+				break;
+			nCredit = 0;
+		}
 
 		if (bParam)
 			m_pCourse = new CCourse(csID, csName, nCredit);
@@ -398,4 +484,15 @@ void COption::DeleteCourse(bool bMsg/* = true*/)
 	}
 	else if (bMsg)
 		DisplayNullObjMsg();
+}
+
+bool COption::ValidateInput(istream& InputStream) const
+{
+	if (InputStream.fail()) {
+		InputStream.clear();
+		InputStream.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Invalid input! Try again ..." << endl;
+		return false;
+	}
+	return true;
 }

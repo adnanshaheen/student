@@ -41,8 +41,9 @@ public:
 	void DeleteCourse(bool bMsg = true);
 
 private:
-	void AddCourses();
+	void AddCourses(CStudent* pStudent);
 	void DisplayNullObjMsg() const;
+	bool ValidateInput(istream& InputStream) const;
 
 private:
 	CStudent* m_pStudent;

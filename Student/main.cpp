@@ -12,8 +12,11 @@ int main()
 	int nSubOption = -1;
 
 	while (nOption) {
+		nOption = -1;
+		nSubOption = -1;
 		switch (nOption = cOptions.MainOptions()) {
 		case 1:
+			
 			while (nSubOption != 5) {
 				switch (nSubOption = cOptions.StudentOptions()) {
 				case 1:
